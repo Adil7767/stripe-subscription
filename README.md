@@ -60,3 +60,14 @@ This project demonstrates a full-stack Stripe subscription flow using React for 
 
 ## License
 MIT
+
+## Contributing
+
+Contributions are welcome! If you'd like to improve this project, please open an issue or submit a pull request. Make sure to follow these guidelines:
+
+- Fork the repository and create your branch from `main`.
+- Ensure your code follows the existing style and passes linting/tests.
+- Add clear commit messages and documentation for any new features or changes.
+- For major changes, please open an issue first to discuss what you would like to change.
+
+Thank you for helping make this project better!
