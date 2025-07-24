@@ -1,72 +1,62 @@
-# Getting Started with Create React App
+# Stripe Subscription Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project demonstrates a full-stack Stripe subscription flow using React for the frontend and Express for the backend. Users can subscribe to a $5/month plan, and the backend dynamically creates Stripe products and prices, manages checkout sessions, and saves user info to product metadata.
 
-## Available Scripts
+## Features
+- React frontend with subscription button and success page
+- Express backend with endpoints for Stripe Checkout, session details, and metadata updates
+- Dynamic product and price creation on each subscription
+- User info saved to Stripe product metadata after successful payment
 
-In the project directory, you can run:
+## Getting Started
 
-### `npm start`
+### Prerequisites
+- Node.js and npm/yarn
+- Stripe account (for API keys)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Installation
+1. Clone the repo and install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+2. Set your Stripe secret key in `server.js`:
+   - Replace the placeholder in this line:
+     ```js
+     const stripe = Stripe('sk_test_*******same***above***');
+     ```
+   - **Note:** The previous key `s_t_51RoOooCkCgzukSnC2dgvege2t9q7Znc9zJmV4o7qXAcrqaOlXV8xCI7tARLRB12jJgyezGJ4bgPQ7dGskbnxvLSV00IW0Xjzzq` should be replaced with the correct test secret key: `sk_test_*******same***above***`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Running the App
+1. Start the backend server:
+   ```bash
+   npm run server
+   # or
+   yarn server
+   ```
+   The backend runs on [http://localhost:4242](http://localhost:4242).
+2. Start the React frontend:
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+   The frontend runs on [http://localhost:3000](http://localhost:3000).
 
-### `npm test`
+## API Endpoints
+- `POST /create-checkout-session` — Creates a Stripe Checkout session for a subscription. Expects `{ userId }` in the body.
+- `GET /session-details?session_id=...` — Retrieves session and customer details after payment.
+- `POST /save-user-to-product` — Saves the user's email and session to the product's metadata. Expects `{ session_id }` in the body.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
+- `src/` — React frontend
+- `server.js` — Express backend
+- `public/` — Static assets
 
-### `npm run build`
+## Notes
+- This project is for demo/testing purposes. Do not use test keys in production.
+- You must use your own Stripe account and keys for real payments.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# stripe-subscription
-# stripe-subscription
+## License
+MIT
