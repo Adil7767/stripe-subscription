@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders Stripe Subscription Demo title and subscribe button', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByText(/Stripe Subscription Demo/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /subscribe for \$5\/month/i })).toBeInTheDocument();
 });

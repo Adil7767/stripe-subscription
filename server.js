@@ -1,11 +1,14 @@
 const express = require('express');
 const Stripe = require('stripe');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
-const stripe = Stripe('******************');
-// s_t_51RoOooCkCgzukSnC2dgvege2t9q7Znc9zJmV4o7qXAcrqaOlXV8xCI7tARLRB12jJgyezGJ4bgPQ7dGskbnxvLSV00IW0Xjzzq
-app.use(cors());
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+app.use(cors({
+  origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
+}));
 app.use(express.json());
 
 app.post('/create-checkout-session', async (req, res) => {
@@ -35,8 +38,8 @@ app.post('/create-checkout-session', async (req, res) => {
         },
       ],
       client_reference_id: userId, // Pass your user ID here
-      success_url: 'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:3000/cancel',
+      success_url: `${process.env.CLIENT_ORIGIN || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.CLIENT_ORIGIN || 'http://localhost:3000'}/cancel`,
     });
 
     res.json({ url: session.url });
@@ -83,4 +86,5 @@ app.post('/save-user-to-product', async (req, res) => {
   }
 });
 
-app.listen(4242, () => console.log('Server running on port 4242')); 
+const PORT = process.env.SERVER_PORT || 4242;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); 
